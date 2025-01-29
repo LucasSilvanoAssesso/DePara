@@ -1,1 +1,3 @@
-500QualquerValor80Y
+500Nome do Medico nao preenchido                                                                     0R
+000Nome do Medico preenchido                                                                        10G
+001Nome do Medico invalido ou  classificado para Nao Usar                                            1R

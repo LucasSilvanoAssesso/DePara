@@ -1,0 +1,2 @@
+010Tipo da atividade preenchida                                                                     10G
+510Tipo da atividade nao preenchida                                                                  oR

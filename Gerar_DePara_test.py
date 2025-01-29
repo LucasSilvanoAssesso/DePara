@@ -1,18 +1,52 @@
-def gerar_arquivo_txt(de, para, metrica, ryg, nome_arquivo="saida.txt"):
+def entrada_depara():
+    regras = []  
+    Tamanho_Para = int(input("Quantidade de caracteres do Para: "))  # Tamanho total de cada linha
 
-    para_formatado = str(para)
-    de_formatado = str(de)
+    while True:
+        # Entradas do usuário
+        De = input("De: ")
+        Descricao_Retorno = input("Descrição_Retorno: ")
+        Metrica = input("Metrica: ")
+        Ryg = input("RYG: ")
+        
+        # Somar os caracteres já preenchidos
+        caracteres_utilizados = len(De) + len(Descricao_Retorno) + len(Metrica) + len(Ryg)
+        
+        # Calcular os caracteres restantes
+        espacos_restantes = Tamanho_Para - caracteres_utilizados
+        
+        if espacos_restantes < 0:
+            print("Erro: o tamanho total dos campos excede o limite definido.")
+            continue
+        
+        # Preencher a diferença em 'Descrição_Retorno'
+        Descricao_Retorno += " " * espacos_restantes
+        
+        # Formatar a saída garantindo o tamanho correto
+        saida = f"{De}{Descricao_Retorno}{Metrica}{Ryg}"
+        
+        # Garantir que a linha tenha exatamente Tamanho_Para caracteres antes da quebra de linha
+        saida = saida[:Tamanho_Para] + "\n"
+        
+        # Adicionar a regra formatada à lista
+        regras.append(saida)
+        
+        # Perguntar ao usuário se deseja inserir outra regra
+        continuar = input("Deseja inserir mais uma regra? (S/N): ").strip().upper()
+        if continuar != 'S':
+            break
 
-    metrica_formatada = f"{metrica}" if int(metrica) < 10 else f"{int(metrica):02}"
+    # Exibir as saídas formatadas, garantindo que cada linha termine com uma quebra de linha
+    print("Saídas:")
+    for regra in regras:
+        print(regra, end="")  # Impede que o print adicione uma quebra extra
     
-    ryg_formatado = ryg[0] if ryg else "N"
+    # Salvar todas as regras em um arquivo txt
+    with open("Teste_valida_tipo_atividade.txt", "w", encoding="utf-8", newline="\n") as arquivo:
+        arquivo.writelines(regras)  # Garante que as quebras de linha sejam mantidas corretamente
     
-    conteudo = f"{de_formatado}{para_formatado}{metrica_formatada}{ryg_formatado}"
+    print("Saída salva em 'saida.txt'.")
+    print("Cada regra termina com uma quebra de linha.")
 
-    with open(nome_arquivo, "w", encoding="utf-8") as arquivo:
-        arquivo.write(conteudo)
-    
-    print(f"Arquivo '{nome_arquivo}' gerado com sucesso!")
-
-# Exemplos de uso
-gerar_arquivo_txt(de="500", para="QualquerValor", metrica=80, ryg="Y")   
+# Executar a função
+entrada_depara()
